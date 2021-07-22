@@ -32,6 +32,7 @@ class QuizPage extends StatefulWidget {
     '出身地はどこですか？',
     '年齢はおいくつですか？',
     '年齢はおいくつですか？',
+    '年齢はおいくつですか？',
 
   ];
 
