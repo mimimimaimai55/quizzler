@@ -34,6 +34,13 @@ class QuizPage extends StatefulWidget {
     '青信号は進め',
     'お酒は二十歳から？',
   ];
+  List<bool> answers = [
+    false,
+    true,
+    true,
+    false,
+    true,
+  ];
 
   int questionNumber = 0;
 
@@ -73,14 +80,20 @@ class QuizPage extends StatefulWidget {
                ),
               onPressed: (){
                 //The user picked true.
+
+                bool correctAnswer = answers[questionNumber];
+
+                if (correctAnswer == true){
+                  print('正解！');
+                } else {
+                  print('不正解');
+                }
+
                 setState(() {
                   questionNumber++;
                 });
                 print(questionNumber);
 
-                scoreKeeper.add(
-                  Icon(Icons.check,color:Colors.green,),
-                );
               },
             ),
           ),
@@ -100,6 +113,15 @@ class QuizPage extends StatefulWidget {
                 ),
               ),
               onPressed: (){
+
+                bool correctAnswer = answers[questionNumber];
+
+                if (correctAnswer == false){
+                  print('正解！');
+                } else {
+                  print('不正解');
+                }
+
                 setState(() {
                   questionNumber++;
                 });
