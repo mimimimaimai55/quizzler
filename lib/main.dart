@@ -28,12 +28,11 @@ class QuizPage extends StatefulWidget {
 
   List<Icon> scoreKeeper = [];
   List<String> questions = [
-    '好きな食べ物はなんですか？',
-    '出身地はどこですか？',
-    '年齢はおいくつですか？',
-    '年齢はおいくつですか？',
-    '年齢はおいくつですか？',
-
+    '赤信号は止まれ',
+    'ナメクジの血は緑色',
+    'うさぎの耳は長い',
+    '青信号は進め',
+    'お酒は二十歳から？',
   ];
 
   int questionNumber = 0;
@@ -50,8 +49,8 @@ class QuizPage extends StatefulWidget {
             padding:EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                  questions[questionNumber],
-                     textAlign: TextAlign.center,
+                questions[questionNumber],
+                textAlign: TextAlign.center,
                 style:TextStyle(
                   fontSize: 25.0,
                   color: Colors.white,
@@ -75,8 +74,10 @@ class QuizPage extends StatefulWidget {
               onPressed: (){
                 //The user picked true.
                 setState(() {
-
+                  questionNumber++;
                 });
+                print(questionNumber);
+
                 scoreKeeper.add(
                   Icon(Icons.check,color:Colors.green,),
                 );
@@ -98,7 +99,12 @@ class QuizPage extends StatefulWidget {
                   color: Colors.white,
                 ),
               ),
-              onPressed: (){},
+              onPressed: (){
+                setState(() {
+                  questionNumber++;
+                });
+                print(questionNumber);
+              },
             ),
           ),
         ),
