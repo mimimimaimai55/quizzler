@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'question.dart';
 
 void main() => runApp(Quizzler());
 
@@ -27,22 +28,14 @@ class QuizPage extends StatefulWidget {
   class _QuizPageState extends State<QuizPage> {
 
   List<Icon> scoreKeeper = [];
-  List<String> questions = [
-    '赤信号は止まれ',
-    'ナメクジの血は緑色',
-    'うさぎの耳は長い',
-    '青信号は進め',
-    'お酒は二十歳から？',
-  ];
-  List<bool> answers = [
-    false,
-    true,
-    true,
-    false,
-    true,
-  ];
 
-  int questionNumber = 0;
+  List<Question> questionBank = [
+      Question(q: '青信号は止まれ', a: false),
+      Question(q: '赤信号は止まれ', a: true),
+      Question(q: '青信号は進め', a: true),
+    ];
+
+  var questionNumber = 0;
 
     @override
   Widget build(BuildContext context){
@@ -56,7 +49,7 @@ class QuizPage extends StatefulWidget {
             padding:EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNumber],
+                questionBank[questionNumber].questionText,
                 textAlign: TextAlign.center,
                 style:TextStyle(
                   fontSize: 25.0,
@@ -81,7 +74,7 @@ class QuizPage extends StatefulWidget {
               onPressed: (){
                 //The user picked true.
 
-                bool correctAnswer = answers[questionNumber];
+                bool correctAnswer = questionBank[questionNumber].questionAnswer;
 
                 if (correctAnswer == true){
                   print('正解！');
@@ -114,7 +107,7 @@ class QuizPage extends StatefulWidget {
               ),
               onPressed: (){
 
-                bool correctAnswer = answers[questionNumber];
+                bool correctAnswer = questionBank[questionNumber].questionAnswer;
 
                 if (correctAnswer == false){
                   print('正解！');
