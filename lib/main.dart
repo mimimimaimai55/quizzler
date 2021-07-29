@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
+import 'quiz_brain.dart';
+
+QuizBrain quizBrain = QuizBrain();
 
 void main() => runApp(Quizzler());
 
@@ -29,13 +31,21 @@ class QuizPage extends StatefulWidget {
 
   List<Icon> scoreKeeper = [];
 
-  List<Question> questionBank = [
-      Question(q: '青信号は止まれ', a: false),
-      Question(q: '赤信号は止まれ', a: true),
-      Question(q: '青信号は進め', a: true),
-    ];
+  void checkAnswer(bool userPickedAnswer){
+    bool correctAnswer = quizBrain.getCorrectAnswer(1);
 
-  var questionNumber = 0;
+    setState(() {
+
+    if (userPickedAnswer == correctAnswer){
+      scoreKeeper.add(Icon(Icons.check, color: Colors.green,));
+    } else {
+      scoreKeeper.add(Icon(Icons.close, color:Colors.red));
+    }
+
+      quizBrain.nextQuestion();
+    });
+
+  }
 
     @override
   Widget build(BuildContext context){
@@ -49,7 +59,7 @@ class QuizPage extends StatefulWidget {
             padding:EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questionBank[questionNumber].questionText,
+                quizBrain.getQuestionText(1),
                 textAlign: TextAlign.center,
                 style:TextStyle(
                   fontSize: 25.0,
@@ -73,19 +83,7 @@ class QuizPage extends StatefulWidget {
                ),
               onPressed: (){
                 //The user picked true.
-
-                bool correctAnswer = questionBank[questionNumber].questionAnswer;
-
-                if (correctAnswer == true){
-                  print('正解！');
-                } else {
-                  print('不正解');
-                }
-
-                setState(() {
-                  questionNumber++;
-                });
-                print(questionNumber);
+                checkAnswer(true);
 
               },
             ),
@@ -106,19 +104,7 @@ class QuizPage extends StatefulWidget {
                 ),
               ),
               onPressed: (){
-
-                bool correctAnswer = questionBank[questionNumber].questionAnswer;
-
-                if (correctAnswer == false){
-                  print('正解！');
-                } else {
-                  print('不正解');
-                }
-
-                setState(() {
-                  questionNumber++;
-                });
-                print(questionNumber);
+                checkAnswer(false);
               },
             ),
           ),
